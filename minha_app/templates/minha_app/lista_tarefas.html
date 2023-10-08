@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Tarefas</title>
+</head>
+<body>
+    <h1>Lista de Tarefas</h1>
+    <ul>
+        {% for tarefa in tarefas %}
+            <li>
+                {{ tarefa.titulo }} - {{ tarefa.descricao }} - {{ tarefa.data_criacao }}
+                <a href="{% url 'edita_tarefa' tarefa.id %}">Editar</a>
+                <a href="{% url 'exclui_tarefa' tarefa.id %}">Excluir</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'cadastra_tarefa' %}">Cadastrar Tarefa</a>
+</body>
+</html>
