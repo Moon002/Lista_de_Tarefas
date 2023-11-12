@@ -3,8 +3,17 @@ from .models import Tarefa  # Certifique-se de que a importação do modelo est�
 from .forms import TarefaForm  # Certifique-se de que a importação do formulário está correta
 
 def lista_tarefas(request):
-    tarefas = Tarefa.objects.all()
+    if request.method == 'POST':
+        tarefa_id = request.POST.get('concluir_tarefa')
+        if tarefa_id:
+            tarefa = Tarefa.objects.get(pk=tarefa_id)
+            tarefa.concluida = True
+            tarefa.save()
+            return redirect('lista_tarefas')
+
+    tarefas = Tarefa.objects.filter(concluida=False)
     return render(request, 'minha_app/lista_tarefas.html', {'tarefas': tarefas})
+
 
 def cadastra_tarefa(request):
     if request.method == 'POST':
@@ -34,7 +43,7 @@ def exclui_tarefa(request, id):
 
 def relatorio_tarefas(request):
     # Lógica para coletar dados de relatório
-    tarefas = Tarefa.objects.all()
+    tarefas = Tarefa.objects.filter(concluida=True)
 
     context = {'tarefas': tarefas}
     return render(request, 'minha_app/relatorio_tarefa.html', context)
