@@ -11,6 +11,10 @@
                 {{ tarefa.titulo }} - {{ tarefa.descricao }} - {{ tarefa.data_criacao }}
                 <a href="{% url 'edita_tarefa' tarefa.id %}">Editar</a>
                 <a href="{% url 'exclui_tarefa' tarefa.id %}">Excluir</a>
+                <input type="checkbox" name="concluir_tarefa" value="{{ tarefa.id }}"> Marcar como concluída
+                {% else %}
+                    (Concluída)
+                {% endif %}
             </li>
         {% endfor %}
     </ul>
