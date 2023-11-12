@@ -6,4 +6,5 @@ urlpatterns = [
     path('cadastra/', views.cadastra_tarefa, name='cadastra_tarefa'),
     path('edita/<int:id>/', views.edita_tarefa, name='edita_tarefa'),
     path('exclui/<int:id>/', views.exclui_tarefa, name='exclui_tarefa'),
+    path('relatorio/', views.relatorio_tarefas, name='relatorio_tarefas'),
 ]

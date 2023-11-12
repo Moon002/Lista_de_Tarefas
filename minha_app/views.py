@@ -32,3 +32,9 @@ def exclui_tarefa(request, id):
     tarefa.delete()
     return redirect('lista_tarefas')
 
+def relatorio_tarefas(request):
+    # Lógica para coletar dados de relatório
+    tarefas = Tarefa.objects.all()
+
+    context = {'tarefas': tarefas}
+    return render(request, 'minha_app/relatorio_tarefa.html', context)
